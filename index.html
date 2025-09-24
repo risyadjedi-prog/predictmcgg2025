@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediksi Lawan Magic Chess Gogo</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #111; color: #eee; }
+    h1 { color: #0f0; }
+    table { margin: 20px auto; border-collapse: collapse; width: 80%; }
+    th, td { border: 1px solid #555; padding: 8px; }
+    th { background: #222; }
+    input { margin: 5px; padding: 5px; }
+    button { padding: 6px 12px; margin: 10px; background: #0f0; border: none; cursor: pointer; }
+    button:hover { background: #0c0; }
+  </style>
+</head>
+<body>
+  <h1>🧩 Prediksi Lawan Magic Chess Gogo</h1>
+  <p>Masukkan nama 8 pemain (Player1 = kamu):</p>
+  <div id="inputs"></div>
+  <button onclick="generate()">Buat Tabel Prediksi</button>
+  <div id="result"></div>
+
+<script>
+function generate() {
+  const players = [];
+  for (let i = 1; i <= 8; i++) {
+    players.push(document.getElementById("p" + i).value || "Player" + i);
+  }
+
+  let html = "<table><tr><th>Round</th><th>Lawan " + players[0] + "</th></tr>";
+  for (let round = 1; round <= 20; round++) {
+    if (round === 1) {
+      html += `<tr><td>${round}</td><td>Creep</td></tr>`;
+    } else {
+      let idx = (round - 2) % (players.length - 1) + 1;
+      html += `<tr><td>${round}</td><td>${players[idx]}</td></tr>`;
+    }
+  }
+  html += "</table>";
+  document.getElementById("result").innerHTML = html;
+}
+
+window.onload = function() {
+  let inputs = "";
+  for (let i = 1; i <= 8; i++) {
+    inputs += `<input type='text' id='p${i}' placeholder='Player${i}'>`;
+  }
+  document.getElementById("inputs").innerHTML = inputs;
+}
+</script>
+</body>
+</html>
